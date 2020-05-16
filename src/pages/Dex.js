@@ -98,6 +98,7 @@ class Dex extends Component {
       >
         <div>Dex</div>
         <div>TODO: -- number loaded at bottom</div>
+        <div>{pokedexList.length}/151</div>
         <InfiniteScroll
           loadMore={this.getTheGuys}
           // hasMore={pokedexList.length === 0}
