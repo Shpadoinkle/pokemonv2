@@ -1,0 +1,27 @@
+import {Provider as MobxProvider} from 'mobx-react'
+import React from 'react'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+import {ThemeProvider} from 'styled-components'
+import './App.css'
+import partyStore from './mobx/party'
+import themeStore from './mobx/theme'
+import Dex from './pages/Dex'
+import Party from './pages/Party'
+
+function App() {
+  return (
+    <MobxProvider partyStore={partyStore}>
+      <ThemeProvider theme={themeStore}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Dex} />
+            <Route exact path="/party" component={Party} />
+            <Redirect to="/" />
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
+    </MobxProvider>
+  )
+}
+
+export default App
