@@ -1,36 +1,48 @@
-import { observable, computed, action } from "mobx";
-import { create, persist } from "mobx-persist";
-import localForage from "localforage";
+import localForage from 'localforage'
+import {action, observable} from 'mobx'
+import {create, persist} from 'mobx-persist'
 
 class PartyMon {
   @persist
   @observable
-  id = "";
+  id = ''
+
+  @persist
+  @observable
+  name = ''
 }
 
-class UserStore {
-  @observable hydrated = false;
+class PartyStore {
+  @observable hydrated = false
 
-  @persist("list", PartyMon)
+  @persist('list', PartyMon)
   @observable
-  list = [];
+  list = []
 
   @action
-  updateMon(mon) {
-    console.log("@@mon", mon);
+  addMon(mon) {
+    if (!this.hydrated) return
+    if (this.list.length >= 6) return //cap out at 6
+    if (this.list.findIndex((e) => e.name === mon.name) > -1) return //don't add duplicates
+    this.list.push(mon)
+  }
+
+  @action
+  clearParty() {
+    this.list = []
   }
 }
 
 const hydrate = create({
   storage: localForage,
   jsonify: false,
-});
+})
 
 // create the state
-const userStore = new UserStore();
+const partyStore = new PartyStore()
 
-hydrate("user", userStore).then(() => {
-  userStore.hydrated = true;
-});
+hydrate('party', partyStore).then(() => {
+  partyStore.hydrated = true
+})
 
-export default userStore;
+export default partyStore

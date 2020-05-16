@@ -1,10 +1,14 @@
 import axios from 'axios'
+import {observer} from 'mobx-react'
 import React, {Component} from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import styled, {withTheme} from 'styled-components'
 import DexMon from '../components/DexMon'
+import PartyPreview from '../components/PartyPreview'
 import Row from '../components/Row'
+import partyStore from '../mobx/party'
 
+@observer
 class Dex extends Component {
   constructor(props) {
     super(props)
@@ -89,6 +93,10 @@ class Dex extends Component {
     })
   }
 
+  addAMon = (mon) => {
+    partyStore.addMon(mon)
+  }
+
   render() {
     const {rawRes, pokedexList} = this.state
     return (
@@ -99,9 +107,16 @@ class Dex extends Component {
         <div>Dex</div>
         <div>TODO: -- number loaded at bottom</div>
         <div>{pokedexList.length}/151</div>
+        <div
+          onClick={() => {
+            partyStore.clearParty()
+          }}
+        >
+          Clear the Party List
+        </div>
         <InfiniteScroll
+          // loadMore={false}
           loadMore={this.getTheGuys}
-          // hasMore={pokedexList.length === 0}
           hasMore={pokedexList.length < 151}
           initialLoad
           loader={
@@ -117,10 +132,10 @@ class Dex extends Component {
 
             <_DexContent>
               {pokedexList.map((e, i) => (
-                <DexMon key={i} index={i} mon={e} />
+                <DexMon key={i} index={i} mon={e} onAdd={this.addAMon} />
               ))}
             </_DexContent>
-            {/* <div>Right</div> */}
+            <PartyPreview />
           </Row>
         </InfiniteScroll>
       </div>

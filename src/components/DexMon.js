@@ -18,37 +18,44 @@ const _DexMon = styled.div`
   height: 100%;
 `
 
-const DexMon = ({mon = {fetching: true}, ...props}) => (
-  <_DexMonWrapper>
-    <_DexMon>
-      <div>
-        <Row jc="center">
-          {mon.fetching && (
-            <Placeholder style={{height: 60, width: 60}}>
-              <Placeholder.Image square />
-            </Placeholder>
-          )}
-        </Row>
+const DexMon = ({mon = {fetching: true}, onAdd, ...props}) => {
+  function onPress() {
+    if (mon.fetching) return
+    if (onAdd) onAdd(mon)
+  }
+
+  return (
+    <_DexMonWrapper onClick={onPress}>
+      <_DexMon>
         <div>
-          #{mon.id ? mon.id.toPokedex() : (props.index + 1).toPokedex()}
-        </div>
-        <div>{mon.name}</div>
-        {mon.fetching ? (
-          <Placeholder>
-            <Placeholder.Paragraph>
-              <Placeholder.Line length="short" />
-            </Placeholder.Paragraph>
-          </Placeholder>
-        ) : (
+          <Row jc="center">
+            {mon.fetching && (
+              <Placeholder style={{height: 60, width: 60}}>
+                <Placeholder.Image square />
+              </Placeholder>
+            )}
+          </Row>
           <div>
-            {mon.types.map((e) => (
-              <div>{e.type.name}</div>
-            ))}
+            #{mon.id ? mon.id.toPokedex() : (props.index + 1).toPokedex()}
           </div>
-        )}
-      </div>
-    </_DexMon>
-  </_DexMonWrapper>
-)
+          <div>{mon.name}</div>
+          {mon.fetching ? (
+            <Placeholder>
+              <Placeholder.Paragraph>
+                <Placeholder.Line length="short" />
+              </Placeholder.Paragraph>
+            </Placeholder>
+          ) : (
+            <div>
+              {mon.types.map((e) => (
+                <div>{e.type.name}</div>
+              ))}
+            </div>
+          )}
+        </div>
+      </_DexMon>
+    </_DexMonWrapper>
+  )
+}
 
 export default withTheme(DexMon)
