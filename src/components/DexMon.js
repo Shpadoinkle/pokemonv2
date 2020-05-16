@@ -29,7 +29,9 @@ const DexMon = ({mon = {fetching: true}, ...props}) => (
             </Placeholder>
           )}
         </Row>
-        <div>#{(props.index + 1).toPokedex()}</div>
+        <div>
+          #{mon.id ? mon.id.toPokedex() : (props.index + 1).toPokedex()}
+        </div>
         <div>{mon.name}</div>
         {mon.fetching ? (
           <Placeholder>
@@ -38,7 +40,11 @@ const DexMon = ({mon = {fetching: true}, ...props}) => (
             </Placeholder.Paragraph>
           </Placeholder>
         ) : (
-          <div>Type Tag</div>
+          <div>
+            {mon.types.map((e) => (
+              <div>{e.type.name}</div>
+            ))}
+          </div>
         )}
       </div>
     </_DexMon>

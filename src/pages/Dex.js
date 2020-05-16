@@ -63,8 +63,30 @@ class Dex extends Component {
   }
 
   fetchMonData = async (theMons) => {
-    // setTimeout(() => {
-    // }, timeout);
+    theMons.forEach(async (pokemon) => {
+      axios({
+        method: 'get',
+        url: pokemon.url,
+      })
+        .then((res) => {
+          const monResponse = res?.data || null
+          console.log('@@@@@@', monResponse.id || 'null')
+          if (monResponse) {
+            this.setState({
+              pokedexList: this.state.pokedexList.map((e) => {
+                if (e.name === monResponse.name) {
+                  return monResponse
+                }
+                return e
+              }),
+            })
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          console.log('@@error - Single Pokemon')
+        })
+    })
   }
 
   render() {
@@ -75,9 +97,10 @@ class Dex extends Component {
         ref={(ref) => (this.scrollParentRef = ref)}
       >
         <div>Dex</div>
-
+        <div>TODO: -- number loaded at bottom</div>
         <InfiniteScroll
           loadMore={this.getTheGuys}
+          // hasMore={pokedexList.length === 0}
           hasMore={pokedexList.length < 151}
           initialLoad
           loader={
