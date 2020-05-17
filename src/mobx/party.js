@@ -2,6 +2,11 @@ import localForage from 'localforage'
 import {action, observable} from 'mobx'
 import {create, persist} from 'mobx-persist'
 
+class MonSprites {
+  @persist
+  @observable
+  front_default = ''
+}
 class PartyMon {
   @persist
   @observable
@@ -10,6 +15,10 @@ class PartyMon {
   @persist
   @observable
   name = ''
+
+  @persist('object', MonSprites)
+  @observable
+  sprites = {}
 }
 
 class PartyStore {

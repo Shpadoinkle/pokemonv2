@@ -56,7 +56,7 @@ class Dex extends Component {
         return newlist
       })
       .then((theMons) => {
-        console.log('@@fetched mons', theMons)
+        // console.log('@@fetched mons', theMons)
         this.fetchMonData([...theMons])
       })
       .catch((err) => {
@@ -74,7 +74,7 @@ class Dex extends Component {
       })
         .then((res) => {
           const monResponse = res?.data || null
-          console.log('@@@@@@', monResponse.id || 'null')
+          // console.log('@@@@@@', monResponse || 'null')
           if (monResponse) {
             this.setState({
               pokedexList: this.state.pokedexList.map((e) => {
