@@ -4,7 +4,9 @@ import React, {Component} from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import styled, {withTheme} from 'styled-components'
 import DexMon from '../components/DexMon'
+import Padder from '../components/Padder'
 import PartyPreview from '../components/PartyPreview'
+import PokeIndex from '../components/PokeIndex'
 import Row from '../components/Row'
 import partyStore from '../mobx/party'
 
@@ -107,13 +109,18 @@ class Dex extends Component {
         <div>Dex</div>
         <div>TODO: -- number loaded at bottom</div>
         <div>{pokedexList.length}/151</div>
-        <div
-          onClick={() => {
-            partyStore.clearParty()
-          }}
-        >
-          Clear the Party List
-        </div>
+        <Padder h={20} />
+        <Row>
+          <div
+            style={{cursor: 'pointer'}}
+            onClick={() => {
+              partyStore.clearParty()
+            }}
+          >
+            <PokeIndex>Clear the Party List</PokeIndex>
+          </div>
+        </Row>
+        <Padder h={20} />
         <InfiniteScroll
           // loadMore={false}
           loadMore={this.getTheGuys}
