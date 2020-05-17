@@ -152,7 +152,7 @@ class Dex extends Component {
               ai="center"
               style={{position: 'relative', minHeight: 100, minWidth: 100}}
             >
-              <PartyPreview />
+              <PartyPreview party={partyStore.list} />
             </Col>
           </HomeRow>
         </InfiniteScroll>

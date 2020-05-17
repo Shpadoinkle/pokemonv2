@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, {withTheme} from 'styled-components'
+import pokeball from '../assets/pokeball.png'
 
 const _HalfMoon = styled.div`
   border: 48px solid #c4c4c433;
@@ -11,6 +12,10 @@ const _HalfMoon = styled.div`
   top: 24px;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  &.empty {
+    display: none;
+  }
 `
 
 const _PreviewImage = styled.img`
@@ -20,14 +25,23 @@ const _PreviewImage = styled.img`
   transform: translate(-50%, -50%);
   height: 140px;
   width: 140px;
+
+  &.empty {
+    height: 95px;
+    width: 95px;
+    top: -2px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
 `
 
 const Tag = ({mon = {}, ...props}) => (
   <>
-    <_HalfMoon />
-    {mon?.sprites?.front_default && (
-      <_PreviewImage src={mon?.sprites?.front_default} />
-    )}
+    <_HalfMoon className={mon?.sprites?.front_default ? '' : 'empty'} />
+    <_PreviewImage
+      className={mon?.sprites?.front_default ? '' : 'empty'}
+      src={mon?.sprites?.front_default || pokeball}
+    />
   </>
 )
 

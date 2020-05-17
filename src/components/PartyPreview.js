@@ -1,10 +1,8 @@
-import {observer} from 'mobx-react'
 import React from 'react'
 import {Link} from 'react-router-dom'
 import styled, {withTheme} from 'styled-components'
 import leftArrow from '../assets/leftArrow.png'
 import pokeball from '../assets/pokeball.png'
-import partyStore from '../mobx/party'
 import Padder from './Padder'
 
 const _PreviewWrapper = styled.div`
@@ -64,17 +62,15 @@ const GoToParty = styled(Link)`
   }
 `
 
-const PartyPreview = observer(({...props}) => {
-  let partList = new Array(6).fill({})
-
-  partyStore.list.map((e, i) => {
-    partList[i] = e
-  })
-
+const PartyPreview = ({party = [], ...props}) => {
+  let emptyList = new Array(6 - party.length).fill({})
   return (
     <_PreviewWrapper>
-      {partList.map((e, i) => (
+      {party.map((e, i) => (
         <_PreviewImage key={i} image={e?.sprites?.front_default || pokeball} />
+      ))}
+      {emptyList.map((e, i) => (
+        <_PreviewImage key={`empty_${i}`} image={pokeball} />
       ))}
       <GoToParty to="/party">
         <div>Party</div>
@@ -83,6 +79,6 @@ const PartyPreview = observer(({...props}) => {
       </GoToParty>
     </_PreviewWrapper>
   )
-})
+}
 
 export default withTheme(PartyPreview)
