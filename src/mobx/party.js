@@ -68,6 +68,17 @@ class PartyStore {
   }
 
   @action
+  updateNickName(mon, name) {
+    if (!this.hydrated) return
+    this.list = this.list.map((e) => {
+      if (e.id === mon.id) {
+        e.nickname = name
+      }
+      return e
+    })
+  }
+
+  @action
   clearParty() {
     this.list = []
   }

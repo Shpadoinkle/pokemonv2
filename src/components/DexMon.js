@@ -1,6 +1,7 @@
 import React from 'react'
 import {Placeholder} from 'semantic-ui-react'
 import styled, {withTheme} from 'styled-components'
+import NickNameForm from './NickNameForm'
 import Padder from './Padder'
 import PokeIndex from './PokeIndex'
 import Poke_Image from './Poke_Image'
@@ -141,7 +142,12 @@ const DexMon = ({
               )}
             </Row>
             <Padder h={14} />
-            <_MonName>{mon.name}</_MonName>
+
+            {canEdit ? (
+              <NickNameForm mon={mon} />
+            ) : (
+              <_MonName>{mon.nickname || mon.name}</_MonName>
+            )}
             <Padder h={14} />
             <PokeIndex>
               #{mon.id ? mon.id.toPokedex() : (props.index + 1).toPokedex()}
