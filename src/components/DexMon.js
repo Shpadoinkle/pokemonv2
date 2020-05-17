@@ -25,6 +25,7 @@ const _DexMon = styled.div`
   width: 200px;
   background: #f9f9f9;
   border: 2px solid #ffffff;
+  border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05),
     -10px -10px 4px rgba(255, 255, 255, 0.2);
@@ -34,6 +35,11 @@ const _DexMon = styled.div`
   justify-content: flex-start;
 
   &.inParty {
+    background: #f2fff4;
+    border-color: #97cbbe;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 150px;
   }
 `
 
@@ -49,26 +55,34 @@ const _MonName = styled.div`
   color: #333333;
 `
 
-const DexMon = ({mon = {fetching: true}, onAdd, ...props}) => {
+const DexMon = ({
+  mon = {},
+  fetching = false,
+  onAdd,
+  isInParty = false,
+  ...props
+}) => {
   function onPress() {
-    if (mon.fetching) return
+    if (fetching) return
     if (onAdd) onAdd(mon)
   }
 
   return (
-    <_DexMonWrapper onClick={onPress}>
-      <_DexMon>
+    <_DexMonWrapper>
+      <_DexMon onClick={onPress} className={isInParty ? ' inParty' : ''}>
         <Padder h={25} />
         <Row reverse jc="center">
-          {mon.fetching ? (
+          {fetching ? (
             <Placeholder style={{minHeight: 22}}>
               <Placeholder.Paragraph>
                 <Placeholder.Line length="short" />
               </Placeholder.Paragraph>
             </Placeholder>
           ) : (
-            mon?.types?.map((e) => (
-              <TypeTag className={`type_${e.type.name}`}>{e.type.name}</TypeTag>
+            mon?.types?.map((e, i) => (
+              <TypeTag key={i} className={`type_${e.type.name}`}>
+                {e.type.name}
+              </TypeTag>
             ))
           )}
         </Row>
@@ -79,33 +93,6 @@ const DexMon = ({mon = {fetching: true}, onAdd, ...props}) => {
           #{mon.id ? mon.id.toPokedex() : (props.index + 1).toPokedex()}
         </PokeIndex>
         <Poke_Image mon={mon} />
-
-        {/* <div>
-          <Row jc="center">
-            {mon.fetching && (
-              <Placeholder style={{height: 60, width: 60}}>
-                <Placeholder.Image square />
-              </Placeholder>
-            )}
-          </Row>
-          <div>
-            #{mon.id ? mon.id.toPokedex() : (props.index + 1).toPokedex()}
-          </div>
-          <div>{mon.name}</div>
-          {mon.fetching ? (
-            <Placeholder>
-              <Placeholder.Paragraph>
-                <Placeholder.Line length="short" />
-              </Placeholder.Paragraph>
-            </Placeholder>
-          ) : (
-            <div>
-              {mon.types.map((e) => (
-                <div>{e.type.name}</div>
-              ))}
-            </div>
-          )}
-        </div> */}
       </_DexMon>
     </_DexMonWrapper>
   )

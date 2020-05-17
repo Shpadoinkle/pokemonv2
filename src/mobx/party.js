@@ -26,6 +26,10 @@ class PartyMon {
   @observable
   name = ''
 
+  @persist
+  @observable
+  nickname = ''
+
   @persist('object', MonSprites)
   @observable
   sprites = {}
@@ -43,11 +47,24 @@ class PartyStore {
   list = []
 
   @action
-  addMon(mon) {
+  addMon(mon, toggle = false) {
     if (!this.hydrated) return
-    if (this.list.length >= 6) return //cap out at 6
-    if (this.list.findIndex((e) => e.name === mon.name) > -1) return //don't add duplicates
-    this.list.push(mon)
+    const doesExist = this.list.findIndex((e) => e.id === mon.id) > -1
+    if (doesExist && !toggle) return //don't add duplicates
+    if (doesExist && toggle) {
+      this.list = this.list.filter((e) => {
+        return e.id !== mon.id
+      })
+    } else if (this.list.length < 6) {
+      const {id, name, sprites, types} = mon
+      this.list.push({id, name, sprites, types, nickname: ''})
+    }
+  }
+
+  @action
+  removeMon(mon) {
+    if (!this.hydrated) return
+    this.list = this.list.filter((e) => e.id !== mon.id)
   }
 
   @action
