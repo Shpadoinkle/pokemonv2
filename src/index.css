@@ -11,3 +11,58 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.type_normal {
+  background-color: #a7a878;
+}
+.type_fire {
+  background-color: #f07f30;
+}
+.type_water {
+  background-color: #678ff0;
+}
+.type_electric {
+  background-color: #f8d030;
+}
+.type_grass {
+  background-color: #77c850;
+}
+.type_ice {
+  background-color: #99d8d8;
+}
+.type_fighting {
+  background-color: #c13028;
+}
+.type_poison {
+  background-color: #a040a0;
+}
+.type_ground {
+  background-color: #e0c068;
+}
+.type_flying {
+  background-color: #a890f0;
+}
+.type_psychic {
+  background-color: #f85887;
+}
+.type_bug {
+  background-color: #a9b820;
+}
+.type_rock {
+  background-color: #b8a038;
+}
+.type_ghost {
+  background-color: #6f5898;
+}
+.type_dragon {
+  background-color: #6f38f8;
+}
+.type_dark {
+  background-color: #705847;
+}
+.type_steel {
+  background-color: #b8b8d0;
+}
+.type_fairy {
+  background-color: #ffaec9;
+}

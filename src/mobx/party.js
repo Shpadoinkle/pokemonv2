@@ -7,6 +7,16 @@ class MonSprites {
   @observable
   front_default = ''
 }
+class MonType {
+  @persist
+  @observable
+  name = ''
+}
+class MonTypesList {
+  @persist('object', MonType)
+  @observable
+  type = {}
+}
 class PartyMon {
   @persist
   @observable
@@ -19,6 +29,10 @@ class PartyMon {
   @persist('object', MonSprites)
   @observable
   sprites = {}
+
+  @persist('list', MonTypesList)
+  @observable
+  types = []
 }
 
 class PartyStore {

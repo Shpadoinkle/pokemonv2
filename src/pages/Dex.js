@@ -145,12 +145,12 @@ class Dex extends Component {
 
 const _DexContent = styled.div`
   display: grid;
-  grid-template-columns: 120px 120px 120px;
+  grid-template-columns: 200px 200px 200px;
   column-gap: 20px;
   row-gap: 20px;
 
   @media only screen and (max-width: 400px) {
-    grid-template-columns: 120px 120px;
+    grid-template-columns: 150px 150px;
   }
 `
 
