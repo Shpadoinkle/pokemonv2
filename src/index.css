@@ -6,6 +6,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e5e5e5;
+  background-attachment: fixed;
+  background-image: url('./assets/Pika.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: initial;
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    background-size: contain;
+  }
 }
 
 code {
