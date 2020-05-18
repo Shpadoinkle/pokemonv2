@@ -1,17 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import styled, {withTheme} from 'styled-components'
-import leftArrow from '../assets/leftArrow.png'
 import pokeball from '../assets/pokeball.png'
-import Padder from './Padder'
+import GoToButton from './GoToButton'
 
 const _PreviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
+  /* position: fixed; */
   @media only screen and (max-width: 800px) {
-    position: relative;
+    /* position: relative; */
     flex-direction: row;
     justify-content: center;
   }
@@ -57,26 +56,24 @@ const GoToParty = styled(Link)`
   @media only screen and (max-width: 800px) {
     position: fixed;
     background-color: #107b6a;
-    bottom: 40px;
-    right: 40px;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
   }
 `
 
-const PartyPreview = ({party = [], ...props}) => {
+const PartyPreview = ({party = [], className = '', ...props}) => {
   let emptyList = new Array(6 - party.length).fill({})
   return (
-    <_PreviewWrapper>
+    <_PreviewWrapper className={className}>
       {party.map((e, i) => (
         <_PreviewImage key={i} image={e?.sprites?.front_default || pokeball} />
       ))}
       {emptyList.map((e, i) => (
         <_PreviewImage key={`empty_${i}`} image={pokeball} />
       ))}
-      <GoToParty to="/party">
-        <div>Party</div>
-        <Padder h={2} />
-        <img src={leftArrow} />
-      </GoToParty>
+
+      <GoToButton to="/party" title="Party" />
     </_PreviewWrapper>
   )
 }

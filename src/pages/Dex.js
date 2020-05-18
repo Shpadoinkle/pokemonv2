@@ -8,9 +8,8 @@ import Col from '../components/Col'
 import DexMon from '../components/DexMon'
 import Padder from '../components/Padder'
 import PartyPreview from '../components/PartyPreview'
-import Row from '../components/Row'
+import Text from '../components/Text'
 import partyStore from '../mobx/party'
-
 @observer
 class Dex extends Component {
   constructor(props) {
@@ -102,35 +101,28 @@ class Dex extends Component {
   render() {
     const {rawRes, pokedexList} = this.state
     return (
-      <div
-        style={{minHeight: '100vh', overflow: 'auto', padding: '60px 30px'}}
-        ref={(ref) => (this.scrollParentRef = ref)}
-      >
-        <ChooseText className="mobileHeader">Choose your team</ChooseText>
-        <InfiniteScroll
-          // loadMore={false}
-          loadMore={this.getTheGuys}
-          hasMore={pokedexList.length < 151}
-          initialLoad
-          // loader={
-          //   <div className="loader" key={0}>
-          //     Loading ...
-          //   </div>
-          // }
-          threshold={100}
-          // useWindow={true}
-        >
-          <HomeRow>
-            {/* <div>Left</div> */}
-            <_leftCol flex={1}>
-              <Padder h={200} />
-              <ChooseText>Choose your team</ChooseText>
-              <Padder h={200} />
-              <Row style={{flexDirection: 'column'}}>
-                <ChooseText style={{fontSize: 12}}>Scroll for more</ChooseText>
-                <img src={scrollIcon} />
-              </Row>
-            </_leftCol>
+      <PageWrapper>
+        <SidePanel className="_title">
+          <SidePanel_Inner>
+            <Text size={36} bold>
+              Choose your team
+            </Text>
+            <Col flex={0} className="mobileHide">
+              <Text size={14}>Scroll for more</Text>
+              <Padder />
+              <img src={scrollIcon} />
+            </Col>
+            <Padder h={20} className="mobileShow" />
+            <PartyPreview party={partyStore.list} className="mobileShow" />
+          </SidePanel_Inner>
+        </SidePanel>
+        <CenterContent>
+          <InfiniteScroll
+            loadMore={this.getTheGuys}
+            hasMore={pokedexList.length < 151}
+            initialLoad
+            threshold={100}
+          >
             <_DexContent>
               {pokedexList.map((e, i) => {
                 return (
@@ -147,66 +139,72 @@ class Dex extends Component {
                 )
               })}
             </_DexContent>
-            <Col
-              flex={1}
-              ai="center"
-              style={{position: 'relative', minHeight: 100, minWidth: 100}}
-            >
-              <PartyPreview party={partyStore.list} />
-            </Col>
-          </HomeRow>
-        </InfiniteScroll>
+          </InfiniteScroll>
+        </CenterContent>
+        <SidePanel className="mobileHide">
+          <SidePanel_Inner>
+            <PartyPreview party={partyStore.list} />
+          </SidePanel_Inner>
+        </SidePanel>
         <IndexWrapper>
-          <ChooseText style={{fontSize: 24}}>
+          <Text size={24} bold>
             {pokedexList.length}/151
-          </ChooseText>
+          </Text>
         </IndexWrapper>
-      </div>
+      </PageWrapper>
     )
   }
 }
 
+const PageWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+
+    .mobileHide {
+      display: none;
+    }
+  }
+  @media only screen and (min-width: 801px) {
+    .mobileShow {
+      display: none;
+    }
+  }
+`
+const CenterContent = styled.div`
+  flex: 2 2 2;
+`
+const SidePanel = styled.div`
+  flex: 1 1 0;
+  position: relative;
+`
+const SidePanel_Inner = styled.div`
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  @media only screen and (max-width: 800px) {
+    position: relative;
+    top: unset;
+    height: auto;
+    display: block;
+  }
+`
 const _DexContent = styled.div`
   display: grid;
   grid-template-columns: 200px 200px 200px;
   column-gap: 20px;
   row-gap: 20px;
-
+  margin: 0 auto;
   @media only screen and (max-width: 800px) {
     grid-template-columns: 150px 150px;
     column-gap: 25px;
-  }
-`
-
-const _leftCol = styled(Col)`
-  align-items: center;
-  justify-content: flex-start;
-  padding: 20px;
-
-  @media only screen and (max-width: 800px) {
-    display: none;
-  }
-`
-
-const HomeRow = styled(Row)`
-  justify-content: space-evenly;
-  @media only screen and (max-width: 800px) {
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-`
-const ChooseText = styled.p`
-  font-family: Moret;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 100%;
-
-  &.mobileHeader {
-    display: none;
-    @media only screen and (max-width: 800px) {
-      display: block;
-    }
   }
 `
 
