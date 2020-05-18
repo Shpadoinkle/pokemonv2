@@ -159,11 +159,10 @@ class Dex extends Component {
 const PageWrapper = styled.div`
   display: flex;
   flex: 1;
-  padding-bottom: 60px;
   @media only screen and (max-width: 800px) {
     flex-direction: column;
     align-items: center;
-    padding: 60px 40px;
+    padding: 40px;
 
     .mobileHide {
       display: none;
@@ -177,6 +176,7 @@ const PageWrapper = styled.div`
 `
 const CenterContent = styled.div`
   flex: 2 2 2;
+  padding-bottom: 60px;
 `
 const SidePanel = styled.div`
   flex: 1 1 0;
