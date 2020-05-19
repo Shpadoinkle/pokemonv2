@@ -19,7 +19,7 @@ const _PreviewWrapper = styled.div`
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 85px;
-    z-index: 100;
+    z-index: 50;
   }
 `
 
