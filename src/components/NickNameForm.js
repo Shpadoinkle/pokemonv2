@@ -5,6 +5,10 @@ import partyStore from '../mobx/party'
 
 const _MonNameWrapper = styled.div`
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  width: 100%;
 
   margin: 0 auto;
   .hoverShow {
@@ -29,8 +33,14 @@ const _MonName = styled.div`
   line-height: 37px;
   text-align: center;
   text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
 
   color: #333333;
+  @media only screen and (max-width: 800px) {
+    font-size: 28px;
+  }
 `
 
 const Input = styled.input`
@@ -55,6 +65,9 @@ const Input = styled.input`
 
   ::placeholder {
     color: ${({theme}) => theme.grey_2};
+  }
+  @media only screen and (max-width: 800px) {
+    font-size: 28px;
   }
 `
 

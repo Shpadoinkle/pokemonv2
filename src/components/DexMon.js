@@ -95,8 +95,14 @@ const _MonName = styled.div`
   line-height: 37px;
   text-align: center;
   text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
 
   color: #333333;
+  @media only screen and (max-width: 800px) {
+    font-size: 28px;
+  }
 `
 
 const DexMon = ({

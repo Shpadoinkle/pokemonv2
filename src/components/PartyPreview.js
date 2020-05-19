@@ -13,6 +13,13 @@ const _PreviewWrapper = styled.div`
     /* position: relative; */
     flex-direction: row;
     justify-content: center;
+    /* position: relative; */
+    flex-direction: row;
+    justify-content: center;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 85px;
+    z-index: 100;
   }
 `
 
@@ -29,6 +36,8 @@ const _PreviewImage = styled.div`
     width: 50px;
     margin: 0px 5px;
     background-size: contain;
+    background-color: #e5e5e5;
+    border-radius: 50%;
   }
 `
 

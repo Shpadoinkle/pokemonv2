@@ -113,9 +113,9 @@ class Dex extends Component {
               <img src={scrollIcon} />
             </Col>
             <Padder h={20} className="mobileShow" />
-            <PartyPreview party={partyStore.list} className="mobileShow" />
           </SidePanel_Inner>
         </SidePanel>
+        <PartyPreview party={partyStore.list} className="mobileShow" />
         <CenterContent>
           <InfiniteScroll
             loadMore={this.getTheGuys}
