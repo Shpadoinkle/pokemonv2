@@ -67,7 +67,11 @@ const PartyPreview = ({party = [], className = '', ...props}) => {
   return (
     <_PreviewWrapper className={className}>
       {party.map((e, i) => (
-        <_PreviewImage key={i} image={e?.sprites?.front_default || pokeball} />
+        <_PreviewImage
+          className="jello-horizontal"
+          key={i}
+          image={e?.sprites?.front_default || pokeball}
+        />
       ))}
       {emptyList.map((e, i) => (
         <_PreviewImage key={`empty_${i}`} image={pokeball} />
