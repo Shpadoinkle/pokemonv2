@@ -88,7 +88,7 @@ const _DexMon = styled.div`
 `
 
 const _MonName = styled.div`
-  font-family: Moret;
+  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 32px;

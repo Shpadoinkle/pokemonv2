@@ -162,7 +162,7 @@ const PageWrapper = styled.div`
   @media only screen and (max-width: 800px) {
     flex-direction: column;
     align-items: center;
-    padding: 40px;
+    padding: 120px 40px;
 
     .mobileHide {
       display: none;
@@ -176,7 +176,10 @@ const PageWrapper = styled.div`
 `
 const CenterContent = styled.div`
   flex: 2 2 2;
-  padding-bottom: 60px;
+  padding: 100px 0px 60px;
+  @media only screen and (max-width: 800px) {
+    padding: 0px 0px 60px;
+  }
 `
 const SidePanel = styled.div`
   flex: 1 1 0;

@@ -148,10 +148,9 @@ const PageWrapper = styled.div`
   display: flex;
   flex: 1;
   @media only screen and (max-width: 800px) {
+    padding: 120px 40px;
     flex-direction: column;
     align-items: center;
-    padding: 40px;
-    padding-bottom: 80px;
     .mobileHide {
       display: none;
     }
@@ -164,6 +163,10 @@ const PageWrapper = styled.div`
 `
 const CenterContent = styled.div`
   flex: 2 2 2;
+  padding: 100px 0px 60px;
+  @media only screen and (max-width: 800px) {
+    padding: 20px 0px 60px;
+  }
 `
 const SidePanel = styled.div`
   width: 100%;

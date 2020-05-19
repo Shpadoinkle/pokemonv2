@@ -17,7 +17,7 @@ const GoToParty = styled(Link)`
   align-items: center;
   color: #fff;
   text-decoration: none;
-  font-family: Moret;
+  font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;

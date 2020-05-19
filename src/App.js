@@ -3,6 +3,7 @@ import React from 'react'
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import './App.css'
+import NavBarr from './components/Navbarr'
 import partyStore from './mobx/party'
 import themeStore from './mobx/theme'
 import Dex from './pages/Dex'
@@ -13,6 +14,7 @@ function App() {
     <MobxProvider partyStore={partyStore}>
       <ThemeProvider theme={themeStore}>
         <BrowserRouter>
+          <NavBarr />
           <Switch>
             <Route exact path="/" component={Dex} />
             <Route exact path="/party" component={Party} />
