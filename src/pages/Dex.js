@@ -219,6 +219,9 @@ const IndexWrapper = styled.div`
   bottom: 0;
   height: 40px;
   width: 100%;
+
+  max-width: 2000px;
+  margin: 0 auto;
   text-align: center;
   background-color: #e5e5e5;
   display: flex;
