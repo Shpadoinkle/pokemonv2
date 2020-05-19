@@ -7,6 +7,7 @@ import PokeIndex from './PokeIndex'
 import Poke_Image from './Poke_Image'
 import Row from './Row'
 import TypeTag from './TypeTag'
+import {X} from 'react-feather'
 
 const _Remove = styled.div`
   height: 28px;
@@ -20,6 +21,7 @@ const _Remove = styled.div`
 
   display: flex;
   justify-content: center;
+  align-items: center;
 
   font-size: 20px;
   line-height: 28px;
@@ -165,7 +167,11 @@ const DexMon = ({
           </>
         )}
         <Poke_Image mon={mon} />
-        {!!onRemove && <_Remove onClick={onRemovePress}>x</_Remove>}
+        {!!onRemove && (
+          <_Remove onClick={onRemovePress}>
+            <X size={18} />
+          </_Remove>
+        )}
       </_DexMon>
     </_DexMonWrapper>
   )
