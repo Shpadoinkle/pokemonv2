@@ -147,6 +147,8 @@ class Dex extends Component {
 const PageWrapper = styled.div`
   display: flex;
   flex: 1;
+  max-width: 2000px;
+  margin: 0 auto;
   @media only screen and (max-width: 800px) {
     padding: 120px 40px;
     flex-direction: column;
